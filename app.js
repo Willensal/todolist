@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const mongodb = require("mongodb");
-const date = require(__dirname + "/date.js");
 var ObjectId = require('mongodb').ObjectId;
 const _ = require("lodash");
 
