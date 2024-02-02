@@ -1,6 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const username = encodeURIComponent("<username>");
+const password = encodeURIComponent("<password>");
+const cluster = "<clusterName>";
+const authSource = "<authSource>";
+const authMechanism = "<authMechanism>";
 const mongodb = require("mongodb");
 var ObjectId = require('mongodb').ObjectId;
 const _ = require("lodash");
@@ -11,6 +16,43 @@ app.set("view engine", "ejs"); // setting view engine to ejs
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
+
+// to connect to mongo server online
+
+// const { MongoClient, ServerApiVersion } = require('mongodb');
+// const uri = "mongodb+srv://bestlawn123:simeon2010@serverlessinstance0.z8vn5zn.mongodb.net/?retryWrites=true&w=majority";
+
+// // Create a MongoClient with a MongoClientOptions object to set the Stable API version
+// const client = new MongoClient(uri, {
+//     serverApi: {
+//         version: ServerApiVersion.v1,
+//         strict: true,
+//         deprecationErrors: true,
+//     }
+// });
+// async function run() {
+//     try {
+//         family:4
+//         // Connect the client to the server	(optional starting in v4.7)
+//         await client.connect();
+//         // Send a ping to confirm a successful connection
+//         await client.db("admin").command({ ping: 1 });
+//         console.log("Pinged your deployment. You successfully connected to MongoDB!");
+//     } finally {
+//         // Ensures that the client will close when you finish/error
+//         await client.close();
+//     }
+// }
+// run().catch(console.dir);
+
+main().catch(err => console.log(err));
+async function main() {
+
+  await mongoose.connect("mongodb+srv://bestlawn123:simeon2010@serverlessinstance0.z8vn5zn.mongodb.net/?retryWrites=true&w=majority")
+
+}
+
+
 
 
 
@@ -25,12 +67,6 @@ const todayDate = function () {
     };
     return today.toLocaleDateString("en-US", options);
 };
-
-
-const client = mongoose.connect("mongodb://localhost:27017/todolistDB", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
 
 const itemsSchema = {
     name: String,
@@ -154,7 +190,6 @@ app.get("/about", function (req, res) {
 
 });
 
-app.listen(3000, function () {
-    console.log("server running on port 3000");
-
-});
+app.listen(3000 || process.env.PORT, () => {
+    console.log("Server is running.");
+  });
