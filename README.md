@@ -20,3 +20,12 @@ This webapp uses mongodb for database.
 The webbapp is accesible at:   https://todo-list-bfj6.onrender.com/
 
 
+# Installation
+To run this application locally or to modify it and make it your own. 
+* Clone the repository to your local machine
+* Navigate to the project directory
+* Initialize npm and install the necessary dependencies using npm(npm install express ...)
+* Start the server
+* Open your web broowser and visit 'localhost:3000' to access the application.
+
+
